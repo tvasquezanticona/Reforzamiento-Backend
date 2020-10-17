@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.business.model.api.request.StudentRequest;
 import com.example.demo.business.model.api.response.StudentResponse;
-import com.example.demo.business.model.business.Student;
 import com.example.demo.business.service.StudentService;
 
 import io.reactivex.Completable;
@@ -26,8 +25,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 /**
  * <b>Class:</b> StudentController.<br/>
@@ -42,6 +39,8 @@ class StudentController {
 
   private StudentService service;
 
+  private ControllerMapper mapper;
+
   @ApiResponses(value = {
           @ApiResponse(
                   responseCode = "201",
@@ -55,20 +54,20 @@ class StudentController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Completable save(@RequestBody @Valid StudentRequest request) {
-    return Single.fromCallable(() -> mapStudent(request))
+    return Single.fromCallable(() -> mapper.mapStudent(request))
             .flatMapCompletable(service::save);
   }
 
-  private Student mapStudent(StudentRequest request) {
-    return Student.builder()
-            .otherStudentDetail(request.getOtherStudentDetail())
-            .middleName(request.getMiddleName())
-            .lastName(request.getLastName())
-            .gender(request.getGender())
-            .firstName(request.getFirstName())
-            .dateOfBirth(LocalDate.now())
-            .build();
-  }
+  //  private Student mapStudent(StudentRequest request) {
+  //    return Student.builder()
+  //            .otherStudentDetail(request.getOtherStudentDetail())
+  //            .middleName(request.getMiddleName())
+  //            .lastName(request.getLastName())
+  //            .gender(request.getGender())
+  //            .firstName(request.getFirstName())
+  //            .dateOfBirth(LocalDate.now())
+  //            .build();
+  //  }
 
   @ApiResponses(value = {
           @ApiResponse(responseCode = "200",
@@ -80,19 +79,19 @@ class StudentController {
   @GetMapping
   public Observable<StudentResponse> findAll() {
     return service.findAll()
-            .map(this::mapStudentResponse);
+            .map(mapper::mapStudentResponse);
   }
 
-  private StudentResponse mapStudentResponse(Student student) {
-    return StudentResponse.builder()
-            .dateOfBirth(student.getDateOfBirth())
-            .firstName(student.getFirstName())
-            .gender(student.getGender())
-            .lastName(student.getLastName())
-            .middleName(student.getMiddleName())
-            .otherStudentDetail(student.getOtherStudentDetail())
-            .build();
-  }
+  //  private StudentResponse mapStudentResponse(Student student) {
+  //    return StudentResponse.builder()
+  //            .dateOfBirth(student.getDateOfBirth())
+  //            .firstName(student.getFirstName())
+  //            .gender(student.getGender())
+  //            .lastName(student.getLastName())
+  //            .middleName(student.getMiddleName())
+  //            .otherStudentDetail(student.getOtherStudentDetail())
+  //            .build();
+  //  }
 
 
 }

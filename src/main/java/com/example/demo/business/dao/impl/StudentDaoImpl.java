@@ -25,46 +25,48 @@ class StudentDaoImpl implements StudentDao {
 
   private StudentRepository repository;
 
+  private StudentMapper mapper;
+
   @Override
   public Observable<Student> findAll() {
     return Observable.fromCallable(() -> repository.findAll())
             .subscribeOn(Schedulers.io())
             .flatMapIterable(studentEntities -> studentEntities)
-            .map(this::mapStudent)
+            .map(mapper::mapStudent)
             .doOnSubscribe(disposable -> log.debug("Listing the students with their data."))
             .doOnNext(student -> log.trace(student.toString()))
             .doOnComplete(() -> log.info("The list of students has been completed."));
   }
 
-  private Student mapStudent(StudentEntity entity) {
-    return Student.builder()
-            .dateOfBirth(entity.getDateOfBirth())
-            .firstName(entity.getFirstName())
-            .gender(entity.getGender())
-            .lastName(entity.getLastName())
-            .middleName(entity.getMiddleName())
-            .otherStudentDetail(entity.getOtherStudentDetail())
-            .build();
-  }
+//  private Student mapStudent(StudentEntity entity) {
+//    return Student.builder()
+//            .dateOfBirth(entity.getDateOfBirth())
+//            .firstName(entity.getFirstName())
+//            .gender(entity.getGender())
+//            .lastName(entity.getLastName())
+//            .middleName(entity.getMiddleName())
+//            .otherStudentDetail(entity.getOtherStudentDetail())
+//            .build();
+//  }
 
   @Override
   public Completable save(Student student) {
-    return Single.fromCallable(() -> mapStudentEntity(student))
+    return Single.fromCallable(() -> mapper.mapStudentEntity(student))
             .map(repository::save)
             .subscribeOn(Schedulers.io())
             .doOnSubscribe(disposable -> log.debug("Registering the student."))
-            .doOnSuccess(entity -> log.info("The student was saved correctly."))
-            .ignoreElement();
+            .ignoreElement()
+            .doOnComplete(() -> log.info("The student was saved correctly."));
   }
 
-  private StudentEntity mapStudentEntity(Student student) {
-    return StudentEntity.builder()
-            .dateOfBirth(student.getDateOfBirth())
-            .firstName(student.getFirstName())
-            .gender(student.getGender())
-            .lastName(student.getLastName())
-            .middleName(student.getMiddleName())
-            .otherStudentDetail(student.getOtherStudentDetail())
-            .build();
-  }
+//  private StudentEntity mapStudentEntity(Student student) {
+//    return StudentEntity.builder()
+//            .dateOfBirth(student.getDateOfBirth())
+//            .firstName(student.getFirstName())
+//            .gender(student.getGender())
+//            .lastName(student.getLastName())
+//            .middleName(student.getMiddleName())
+//            .otherStudentDetail(student.getOtherStudentDetail())
+//            .build();
+//  }
 }
