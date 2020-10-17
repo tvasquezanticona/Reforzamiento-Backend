@@ -1,19 +1,17 @@
 package com.example.demo.business.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * <b>Class:</b> StudentEntity.<br/>
@@ -46,8 +44,8 @@ public class StudentEntity {
   @Column(name = "lastName", nullable = false, length = 20)
   private String lastName;
 
-  @Column(name = "dateOfBirth", nullable = false)
-  private LocalDate dateOfBirth;
+  @Column(name = "dateOfBirth", nullable = false, length = 10)
+  private String dateOfBirth;
 
   @Column(name = "otherStudentDetail", nullable = false, length = 50)
   private String otherStudentDetail;

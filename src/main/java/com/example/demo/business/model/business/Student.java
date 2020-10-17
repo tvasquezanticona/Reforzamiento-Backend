@@ -1,7 +1,5 @@
 package com.example.demo.business.model.business;
 
-import java.time.LocalDate;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +21,6 @@ public class Student {
   private String firstName;
   private String middleName;
   private String lastName;
-  private LocalDate dateOfBirth;
+  private String dateOfBirth;
   private String otherStudentDetail;
 }

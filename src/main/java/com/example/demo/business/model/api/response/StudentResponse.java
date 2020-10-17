@@ -52,7 +52,7 @@ public class StudentResponse {
           example = "01/01/2020",
           type = "String"
   )
-  private LocalDate dateOfBirth;
+  private String dateOfBirth;
 
   @Schema(
           description = "other student detail",

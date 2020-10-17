@@ -1,6 +1,5 @@
 package com.example.demo.business.model.api.request;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotBlank;
@@ -10,8 +9,6 @@ import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDate;
 
 /**
  * <b>Class:</b> StudentRequest.<br/>
@@ -24,7 +21,6 @@ import java.time.LocalDate;
 @Getter
 public class StudentRequest {
 
-  private static final String ONLY_NUMBER = "[0-9]*";
   private static final String ONLY_LETTER = "[a-zA-Z]*";
   private static final String REGEXP_GENDER = "(M|F)";
   
@@ -75,16 +71,17 @@ public class StudentRequest {
   @Size(min = 1, max = 20)
   private String lastName;
 
-//  @Schema(
-//          description = "date of birth",
-//          type = "LocalDate",
-//          pattern = "[0-9]{2}/[0-9]{2}/[1-9]{4}",
-//          example = "01/01/2020",
-//          required = true
-//  )
-//  @NotBlank
-//  @Pattern(regexp = "[1-9]{4}/[0-9]{2}/[0-9]{2}")
-//  private LocalDate dateOfBirth;
+  @Schema(
+          description = "date of birth",
+          type = "String",
+          pattern = "[0-9]{2}/[0-9]{2}/[1-9]{4}",
+          example = "01/01/2020",
+          required = true
+  )
+  @NotBlank
+  @Pattern(regexp = "[0-9]{2}/[0-9]{2}/[1-9]{4}")
+  @Size(min = 1, max = 10)
+  private String dateOfBirth;
 
   @Schema(
           description = "other student detail",
