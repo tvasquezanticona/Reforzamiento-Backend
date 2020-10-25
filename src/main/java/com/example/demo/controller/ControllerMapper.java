@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.business.model.api.request.StudentRequest;
+import com.example.demo.business.model.api.response.StudentDetailResponse;
 import com.example.demo.business.model.api.response.StudentResponse;
 import com.example.demo.business.model.business.Student;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * <b>Class:</b> StudentApiMapper.<br/>
@@ -16,6 +18,11 @@ import java.time.LocalDate;
 @Component
 class ControllerMapper {
 
+  /**
+   * convert values from StudentRequest to Student.
+   * @param request of type {@link StudentRequest}
+   * @return {@link Student}
+   */
   public Student mapStudent(StudentRequest request) {
     return Student.builder()
         .otherStudentDetail(request.getOtherStudentDetail())
@@ -27,6 +34,11 @@ class ControllerMapper {
         .build();
   }
 
+  /**
+   * convert values from Student to StudentResponse.
+   * @param student of type {@link Student}
+   * @return {@link StudentResponse}
+   */
   public StudentResponse mapStudentResponse(Student student) {
     return StudentResponse.builder()
         .dateOfBirth(student.getDateOfBirth())
@@ -36,6 +48,17 @@ class ControllerMapper {
         .middleName(student.getMiddleName())
         .otherStudentDetail(student.getOtherStudentDetail())
         .build();
+  }
+
+  /**
+   * convert values from StudentResponses to StudentDetailResponses.
+   * @param responses of type {@link List} {@link StudentResponse}
+   * @return {@link StudentDetailResponse}
+   */
+  public StudentDetailResponse mapStudentDetailResponse(
+          List<StudentResponse> responses) {
+
+    return new StudentDetailResponse("Student", responses);
   }
 
 }

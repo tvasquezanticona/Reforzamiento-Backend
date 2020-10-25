@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.business.model.api.request.StudentRequest;
+import com.example.demo.business.model.api.response.StudentDetailResponse;
 import com.example.demo.business.model.api.response.StudentResponse;
 import com.example.demo.business.service.StudentService;
 
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <b>Class:</b> StudentController.<br/>
@@ -33,7 +35,7 @@ import javax.validation.Valid;
  */
 
 @RestController
-@RequestMapping(path = "/students")
+@RequestMapping(path = "${application.api.path}")
 @AllArgsConstructor
 class StudentController {
 
@@ -81,6 +83,22 @@ class StudentController {
     return service.findAll()
             .map(mapper::mapStudentResponse);
   }
+
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200",
+                  description = "Show Students",
+                  content = @Content(
+                          schema = @Schema(implementation = StudentDetailResponse.class)))
+  })
+  @GetMapping(path = "/data")
+  public Single<StudentDetailResponse> find() {
+    return service.findAll()
+            .map(mapper::mapStudentResponse)
+            .toList()
+            .map(mapper::mapStudentDetailResponse);
+  }
+
+
 
   //  private StudentResponse mapStudentResponse(Student student) {
   //    return StudentResponse.builder()
