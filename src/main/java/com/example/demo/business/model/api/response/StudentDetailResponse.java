@@ -1,10 +1,9 @@
 package com.example.demo.business.model.api.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -15,12 +14,12 @@ public class StudentDetailResponse {
           type = "String",
           example = "Student"
   )
-  private String data;
+  private final String data;
 
   @Schema(
           description = "students",
           type = "List<StudentResponse>"
   )
-  private List<StudentResponse> students;
+  private final List<StudentResponse> students;
 
 }

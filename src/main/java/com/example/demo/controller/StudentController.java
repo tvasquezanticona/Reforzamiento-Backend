@@ -4,7 +4,6 @@ import com.example.demo.business.model.api.request.StudentRequest;
 import com.example.demo.business.model.api.response.StudentDetailResponse;
 import com.example.demo.business.model.api.response.StudentResponse;
 import com.example.demo.business.service.StudentService;
-
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -13,10 +12,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
-
+import javax.validation.Valid;
 import lombok.AllArgsConstructor;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.util.List;
 
 /**
  * <b>Class:</b> StudentController.<br/>
@@ -39,9 +33,9 @@ import java.util.List;
 @AllArgsConstructor
 class StudentController {
 
-  private StudentService service;
+  private final StudentService service;
 
-  private ControllerMapper mapper;
+  private final StudentApiMapper mapper;
 
   @ApiResponses(value = {
           @ApiResponse(

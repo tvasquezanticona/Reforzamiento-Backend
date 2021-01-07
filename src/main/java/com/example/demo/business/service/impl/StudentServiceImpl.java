@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 class StudentServiceImpl implements StudentService {
 
-  private StudentDao dao;
+  private final StudentDao dao;
 
   @Override
   public Observable<Student> findAll() {
