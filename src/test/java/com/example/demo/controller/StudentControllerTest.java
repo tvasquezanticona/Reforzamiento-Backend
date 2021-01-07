@@ -26,7 +26,7 @@ class StudentControllerTest {
   private StudentService service;
 
   @Mock
-  private ControllerMapper mapper;
+  private StudentApiMapper mapper;
 
   @InjectMocks
   private StudentController controller;

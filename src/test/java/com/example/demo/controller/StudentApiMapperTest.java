@@ -12,20 +12,20 @@ import org.junit.jupiter.api.Test;
  * @author RLR
  * @version 1.0.0
  */
-class ControllerMapperTest {
+class StudentApiMapperTest {
 
-  private ControllerMapper controllerMapper;
+  private StudentApiMapper studentApiMapper;
 
   @BeforeEach
   void init() {
-    controllerMapper = new ControllerMapper();
+    studentApiMapper = new StudentApiMapper();
   }
 
   @Test
   void whenMapperEntityThenReturnStudent() {
     StudentRequest request = studentRequest();
 
-    Student student = controllerMapper.mapStudent(request);
+    Student student = studentApiMapper.mapStudent(request);
 
     Student studentExpected = student();
 
@@ -41,7 +41,7 @@ class ControllerMapperTest {
   void whenMapperStudentThenReturnEntity() {
     Student student = student();
 
-    StudentResponse response = controllerMapper.mapStudentResponse(student);
+    StudentResponse response = studentApiMapper.mapStudentResponse(student);
 
     StudentResponse studentExpected = studentResponse();
 
