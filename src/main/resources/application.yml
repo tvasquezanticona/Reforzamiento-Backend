@@ -16,8 +16,17 @@ spring:
           lob:
             non_contextual_creation: true
 
+
+application:
+  api:
+    path: '/application/v1/students'
+
+springdoc:
+  api-docs:
+    path: '${application.api.path}/documentation/openApi'
+
 logging:
   level:
     com:
       example:
-        demo: DEBUG
+        demo: TRACE
