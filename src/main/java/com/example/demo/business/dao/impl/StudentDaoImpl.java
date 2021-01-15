@@ -23,13 +23,13 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 class StudentDaoImpl implements StudentDao {
 
-  private StudentRepository repository;
+  private final StudentRepository repository;
 
-  private StudentMapper mapper;
+  private final StudentMapper mapper;
 
   @Override
   public Observable<Student> findAll() {
-    return Observable.fromCallable(() -> repository.findAll())
+    return Observable.fromCallable(repository::findAll)
             .subscribeOn(Schedulers.io())
             .flatMapIterable(studentEntities -> studentEntities)
             .map(mapper::mapStudent)

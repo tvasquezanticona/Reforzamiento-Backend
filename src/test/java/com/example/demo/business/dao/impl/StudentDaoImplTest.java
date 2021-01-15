@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * <b>Class:</b> StudentDaoImplTest<br/>
@@ -38,7 +39,7 @@ class StudentDaoImplTest {
   void whenFindAllThenReturnStudents() {
 
     Mockito.when(repository.findAll())
-            .thenReturn(Arrays.asList(studentEntity()));
+            .thenReturn(Collections.singletonList(studentEntity()));
 
     Mockito.when(mapper.mapStudent(Mockito.any()))
             .thenReturn(student());

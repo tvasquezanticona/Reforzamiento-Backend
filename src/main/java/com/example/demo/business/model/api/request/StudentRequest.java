@@ -1,14 +1,14 @@
 package com.example.demo.business.model.api.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * <b>Class:</b> StudentRequest.<br/>
@@ -16,9 +16,11 @@ import lombok.Getter;
  * @version 1.0.0
  */
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 public class StudentRequest {
 
   private static final String ONLY_LETTER = "[a-zA-Z]*";
@@ -79,7 +81,7 @@ public class StudentRequest {
           required = true
   )
   @NotBlank
-  @Pattern(regexp = "[0-9]{2}/[0-9]{2}/[1-9]{4}")
+  @Pattern(regexp = "[0-9]{2}/[0-9]{2}/[0-9]{4}")
   @Size(min = 1, max = 10)
   private String dateOfBirth;
 

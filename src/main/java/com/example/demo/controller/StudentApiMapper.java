@@ -4,10 +4,8 @@ import com.example.demo.business.model.api.request.StudentRequest;
 import com.example.demo.business.model.api.response.StudentDetailResponse;
 import com.example.demo.business.model.api.response.StudentResponse;
 import com.example.demo.business.model.business.Student;
-import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  * <b>Class:</b> StudentApiMapper.<br/>
@@ -16,7 +14,7 @@ import java.util.List;
  */
 
 @Component
-class ControllerMapper {
+class StudentApiMapper {
 
   /**
    * convert values from StudentRequest to Student.

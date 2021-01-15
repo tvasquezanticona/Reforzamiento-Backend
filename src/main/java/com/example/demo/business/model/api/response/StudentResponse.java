@@ -4,9 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
-import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
+import lombok.NoArgsConstructor;
 
 /**
  * <b>Class:</b> StudentRequest.<br/>
@@ -14,6 +12,7 @@ import java.time.LocalDate;
  * @version 1.0.0
  */
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
